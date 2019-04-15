@@ -2,7 +2,7 @@
 
 Welkom bij de demo van Jibia Search. 
 
-In dit voorbeeld staan enkele soorten van implementatie mogelijkheden van de Jibia In-site zoekbalk beschreven. 
+In deze pagina staan enkele voorbeelden van implementaties van de jibia zoekbalk uitgewerkt.
 
 Bij vragen contact: 
 
