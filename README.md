@@ -2,8 +2,6 @@
 
 Welkom bij de demo van Jibia Search. 
 
-In deze pagina staan enkele voorbeelden van implementaties van de jibia zoekbalk uitgewerkt.
+In deze pagina zijn enkele voorbeelden van implementaties van de jibia zoekbalk uitgewerkt.
 
-Bij vragen contact: 
-
-info@jibia.nl
+Bij vragen contact: info@jibia.nl
