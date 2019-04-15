@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://cdn.jsdelivr.net/gh/stijnvalkenburg/Jibia-search@bce95c1/search.js" token = "cd2957a67f78a87a50c94666e21891"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/stijnvalkenburg/Jibia-search@bce95c1/search.css">
+<link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<div class = "container">
+    <div class = "halve">
+        <form id = 'formSearch'> 
+        <input class="inputSearch"  placeholder="Jibia search with Jibia styling">
+        </form>
+    </div>
+    <div class = "halve">
+        <form id = "search"> 
+        <input class="inputSearch" id='searchbar' placeholder="Jibia search manual styling">
+        <div id = outputFromApi></div>
+            <script> //This is for the manual styiling ONLY
+            document.getElementById('searchbar').addEventListener('input', function(event){
+                    var req = new XMLHttpRequest();
+                    let token = 'cd2957a67f78a87a50c94666e21891'; //insert Authentication TOKEN
+                    let numberResponse = 5;//Insert number of responses
+                    let value = event.srcElement.value //value of the input field
+                    req.open('GET', decodeURIComponent('https://api.jibia.nl/api/do_search?query='+value+'&token='+token+'&n='+numberResponse), true);
+                    req.addEventListener("readystatechange", function () {
+                        if (req.readyState === 4) {
+                            var json = JSON.parse(req.responseText);
+                            //DO something with JSON with data
+                            HandleData(json);
+                        }
+                    });
+                    req.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+                    req.send(); 
+            })
+
+            function HandleData(dataFromApi){
+                    var productsarray = dataFromApi['result'];     
+                    var list = document.createElement('ul');
+                    list.className += "search-box";
+                    list.id += "autocomplete"
+                    productsarray.map(function(name){ 
+                        let item = document.createElement('li');
+                        let term = name['word'];
+                        item.className += 'search-element term-element';    
+                        item.innerHTML = '<a href = \'' + 'https://' +  window.location.hostname + '/search/' + term  + '\' class = \'term-link\'><p class = \'term-title\'>' + term + '</p></a>'
+                        list.appendChild(item);
+                    });
+                        productsarray.map(function(name){ 
+                            let item = document.createElement('li');
+                            let prod = name["product"]
+                            item.className += "search-element product-element";    
+                            item.innerHTML = "<a href = '" + 'https://' +  window.location.hostname + '/' + prod["url"] + '.html' + "' class = 'product-link'><img class = 'product-image' src ='" + prod["img_url"] + "'><p class = 'prodcut-title'>" + prod["name"] + "</p> </a>"//Dit zou dan al veranderd moeten zijn voor Cloudsuite
+                            list.appendChild(item);
+                        }); 
+                    document.getElementById('outputFromApi').appendChild(list);
+                };
+            </script>
+        </form>
+    </div>
+</div>
+</body>
+
+
+</html>

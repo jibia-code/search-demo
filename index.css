@@ -1,0 +1,23 @@
+.inputSearch{
+    position: relative;
+    display: flex;
+    align-self: center;
+    padding: 15px;
+    width: 250px;
+    height: 20px;
+    border: 1px solid #000773;
+    border-radius: 5px;
+}
+
+.container{
+    width:100vw; 
+    padding: 20px;
+    display: flex;
+}
+.halve{
+    position: relative;
+    display: flex;
+
+    width:40%;
+    margin: 5%;
+}
