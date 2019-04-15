@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script src="https://cdn.jsdelivr.net/gh/stijnvalkenburg/Jibia-search@bce95c1/search.js" token = "cd2957a67f78a87a50c94666e21891"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/stijnvalkenburg/Jibia-search@bce95c1/search.css">
+<script src="https://cdn.jsdelivr.net/gh/stijnvalkenburg/Jibia-search@f8ea043/search.js" token = "cd2957a67f78a87a50c94666e21891"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/stijnvalkenburg/Jibia-search@f8ea043/search.css">
 <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
+
 <div class = "container">
     <div class = "halve">
+        <!--Example with Styling-->
         <form id = 'formSearch'> 
         <input class="inputSearch"  placeholder="Jibia search with Jibia styling">
         </form>
-    </div>
+    </div> 
     <div class = "halve">
+        <!--Example without auto Jibia styling-->
         <form id = "search"> 
         <input class="inputSearch" id='searchbar' placeholder="Jibia search manual styling">
         <div id = outputFromApi></div>
@@ -27,7 +30,7 @@
                     req.addEventListener("readystatechange", function () {
                         if (req.readyState === 4) {
                             var json = JSON.parse(req.responseText);
-                            //DO something with JSON with data
+                            //DO something with JSON with data 
                             HandleData(json);
                         }
                     });
@@ -36,13 +39,13 @@
             })
 
             function HandleData(dataFromApi){
-                    var productsarray = dataFromApi['result'];     
+                    var productsarray = dataFromApi['result']["products"];     
+                    var termsarray = dataFromApi['result']["words"];     
                     var list = document.createElement('ul');
                     list.className += "search-box";
                     list.id += "autocomplete"
-                    productsarray.map(function(name){ 
+                    termsarray.map(function(term){ 
                         let item = document.createElement('li');
-                        let term = name['word'];
                         item.className += 'search-element term-element';    
                         item.innerHTML = '<a href = \'' + 'https://' +  window.location.hostname + '/search/' + term  + '\' class = \'term-link\'><p class = \'term-title\'>' + term + '</p></a>'
                         list.appendChild(item);
